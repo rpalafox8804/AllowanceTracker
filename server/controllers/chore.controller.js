@@ -1,4 +1,4 @@
-const { get } = require("mongoose");
+const mongoose = require('mongoose');
 const Chore = require("../models/chore.model");
 
 module.exports = {

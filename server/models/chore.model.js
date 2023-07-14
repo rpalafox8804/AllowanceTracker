@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
+
 const ChoreSchema = new mongoose.Schema({
-    name: {
+
+    title: {
         type: String,
         required: [true, "Name is required"],
         minlength: [2, "Name must be at least 2 characters long"]
@@ -16,10 +18,14 @@ const ChoreSchema = new mongoose.Schema({
         min: [0, "Chore allowance value must be at least 0"]
     },
     note: {
-        type: String,
+        type: String
         
+    },
+    choreID: {
+        type: Number
     }
 
 }, {timestamps: true});
 
-module.exports = mongoose.model("Chore", ChoreSchema);
+const Chore = mongoose.model("Chore", ChoreSchema);
+module.exports = Chore;

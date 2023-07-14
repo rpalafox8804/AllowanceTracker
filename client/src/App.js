@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import {Routes, Route, Navigate} from 'react-router-dom';
+import RegLogForm from './components/RegLogForm';
+import Dashboard from './components/Dashboard';
+import { useState } from 'react';
+import AdultDashboard from './components/AdultDashboard';
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Routes>
+          {/* {isLoggedIn ? <Route path ="/dashboard" element = {<Dashboard />} /> : <Route path="/" element={<RegLogForm setIsLoggedIn={setIsLoggedIn} />} />} */}
+          <Route path="/" element ={<RegLogForm />} />
+          <Route path ="/dashboard" element = {<Dashboard />} />
+          <Route path ="/dashboard/adult" element = {<AdultDashboard />} />
+
+
+        </Routes>
     </div>
   );
 }

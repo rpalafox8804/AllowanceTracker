@@ -13,6 +13,8 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json(), express.urlencoded({ extended: true }));
     
 const AllMyUserRoutes = require("./routes/user.routes");
+const AllMyChoreRoutes = require("./routes/chore.routes");
 AllMyUserRoutes(app);
+AllMyChoreRoutes(app);
     
 app.listen(8000, () => console.log("The server is all fired up on port 8000"));
