@@ -30,24 +30,41 @@ const ChoreInfo = () => {
             .catch(err => console.log(err))
     }
 
-  return (
-    <div>
-        <h1>Chore Info</h1>
-        <div className='m-4'>
-                        <Link to='/dashboard' className='btn btn-sm btn-primary'>Main Dashboard</Link>
+    return (
+        <div className='container'>
+
+            <div className='row  bg-info justify-content-around'>
+                <div className='col-4'>
+                    <h1 className='my-2'>Chore Info</h1>
+                </div>
+                <div className='col-4 d-flex justify-content-end'>
+                    <div className='m-4 col d-flex justify-content-end'>
+                        <div className=''>
+                            <Link to='/dashboard' className='btn btn-sm btn-primary'>Main Dashboard</Link>
+                        </div>
                     </div>
-        <h2>Chore Title: {choreState.title}</h2>
-        <h2>Assigned Child: {choreState.childAssigned}</h2>
-        <h2>Chore Allowance Value: ${choreState.choreAllowanceValue} </h2>
-        <h2>Chore Notes: {choreState.note} </h2>
-        <div className='m-4'>
-        <Link to={`/dashboard/updateChore/${id}`} className='btn btn-sm btn-warning'>Edit</Link>
+                </div>
+            </div>
+
+            <div className='row justify-content-around bg-warning'>
+                <h2>Chore Title: {choreState.title}</h2>
+                <h2>Assigned Child: {choreState.childAssigned}</h2>
+                <h2>Chore Allowance Value: ${choreState.choreAllowanceValue} </h2>
+                <h2>Chore Notes: {choreState.note} </h2>
+            </div>
+            <div className='row d-flex justify-content-around bg-warning'>
+                <div className='col d-flex mx-3 justify-content-end'>
+                    <Link to={`/dashboard/updateChore/${id}`} className='btn btn-sm btn-info'>Edit</Link>
+                </div>
+                <div className='col d-flex '>
+                    <button className='btn btn-sm btn-danger' onClick={deleteHandler}>Delete</button>
+                </div>
+            </div>
+
+
+
         </div>
-        <button className='btn btn-sm btn-danger' onClick={deleteHandler}>Delete</button>
-
-
-    </div>
-  )
+    )
 }
 
 export default ChoreInfo

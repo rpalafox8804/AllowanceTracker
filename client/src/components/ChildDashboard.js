@@ -1,4 +1,4 @@
-import React , {useCallback} from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -32,7 +32,7 @@ const ChildDashboard = () => {
       })
   }, [])
 
-  
+
   return (
     <div className='container'>
       <div className='row justify-content-around bg-info'>
@@ -40,8 +40,10 @@ const ChildDashboard = () => {
           <h2>{childState.firstName}'s Dashboard</h2>
           <h3>Chores:</h3>
         </div>
-        <div className='col'>
-          <Link to='/dashboard' className='btn btn-sm btn-primary'>Main Dashboard</Link>
+        <div className='col d-flex justify-content-end'>
+          <div className='m-4'>
+            <Link to='/dashboard' className='btn btn-sm btn-primary'>Main Dashboard</Link>
+          </div>
         </div>
       </div>
       <div className='row'>
@@ -59,12 +61,12 @@ const ChildDashboard = () => {
               {
                 choreState.map((chore, i) => {
                   return (
-                  <tr key={i}>
-                    {console.log(i)}
-                    <td><Link to={`/dashboard/readChore/${chore._id}`}>{chore.title}</Link></td>
-                    <td>${chore.choreAllowanceValue}</td>
-                    <td>{chore.note}</td>
-                  </tr>
+                    <tr key={i}>
+                      {console.log(i)}
+                      <td><Link to={`/dashboard/readChore/${chore._id}`}>{chore.title}</Link></td>
+                      <td>${chore.choreAllowanceValue}</td>
+                      <td>{chore.note}</td>
+                    </tr>
                   )
                 })
 
