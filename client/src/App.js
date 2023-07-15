@@ -1,9 +1,13 @@
 import './App.css';
 import {Routes, Route, Navigate} from 'react-router-dom';
+import { useState } from 'react';
 import RegLogForm from './components/RegLogForm';
 import Dashboard from './components/Dashboard';
-import { useState } from 'react';
+import ChildDashboard from './components/ChildDashboard';
 import AdultDashboard from './components/AdultDashboard';
+import AddChore from './components/AddChore';
+import EditChore from './components/EditChore';
+import ChoreInfo from './components/ChoreInfo';
 
 
 function App() {
@@ -15,7 +19,11 @@ function App() {
           {/* {isLoggedIn ? <Route path ="/dashboard" element = {<Dashboard />} /> : <Route path="/" element={<RegLogForm setIsLoggedIn={setIsLoggedIn} />} />} */}
           <Route path="/" element ={<RegLogForm />} />
           <Route path ="/dashboard" element = {<Dashboard />} />
-          <Route path ="/dashboard/adult" element = {<AdultDashboard />} />
+          <Route path ="/dashboard/adult/:id" element = {<AdultDashboard />} />
+          <Route path ="/dashboard/child/:id" element = {<ChildDashboard />} />
+          <Route path = "/dashboard/newChore" element = {<AddChore />} />
+          <Route path = "/dashboard/updateChore/:id" element = {<EditChore />} />
+          <Route path = "dashboard/readChore/:id" element = {<ChoreInfo />} />
 
 
         </Routes>

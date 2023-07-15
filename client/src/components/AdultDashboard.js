@@ -2,12 +2,15 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const AdultDashboard = () => {
+    const { id } = useParams()
     const [choreState, setChoreState] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:8000/api/chores")
+        axios.get(`http://localhost:8000/api/chores/adult/${id}`)
             .then((res) => {
+                console.log(res)
                 setChoreState(res.data)
             })
             .catch((err) => {
@@ -15,56 +18,94 @@ const AdultDashboard = () => {
             })
     }, [])
 
-    const [childState, setChildState] = useState([])
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/users/child")
-            .then((res) => {
-                console.log(res.data.users)
-                setChildState(res.data.users)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+    // const [childState, setChildState] = useState([])
+    // useEffect(() => {
+    //     axios.get("http://localhost:8000/api/users/child")
+    //         .then((res) => {
+    //             setChildState(res.data.users)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [])
 
     const [adultState, setAdultState] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users/adult')
+        axios.get(`http://localhost:8000/api/users/id/${id}`)
             .then((res) => {
-                setAdultState(res.data)
+                setAdultState(res.data.user)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
+    const deleteHandler = (choreId) => {
+        const newList = choreState.filter((chore) => chore._id !== choreId)
+        setChoreState(newList)
+        axios.delete(`http://localhost:8000/api/chores/${choreId}`)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+    // const getParentName = (parentId) => {
+    //     axios.get(`http://localhost:8000/api/users/id/${parentId}`)
+    //         .then((res) => {
+    //             console.log(res)
+    //             return res.data.user.firstName
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }
+
+
+
 
 
     return (
         <div className='container'>
-            <div className='row'>
-                <h1>Adult</h1>
-                <h3>Children:</h3>
+            <div className='row justify-content-around bg-info'>
+                <div className='col'>
+                    <h2>{adultState.firstName} {adultState.lastName} Dashboard</h2>
+                    <h3>Kids Chores:</h3>
+                </div>
+                <div className='col d-flex justify-content-end'>
+                    <div className='m-4'>
+                        <Link to='/dashboard' className='btn btn-sm btn-primary'>Main Dashboard</Link>
+                    </div>
+                </div>
             </div>
             <div className='row'>
                 <div className='col'>
                     <table className='table table-striped table-bordered'>
                         <thead className='bg-primary'>
                             <tr>
-                                <th>Name</th>
-                                <th>Allowance</th>
-                                <th>Number of Chores assigned</th>
-                                
+                                <th>Name of Chore</th>
+                                <th>Child ID</th>
+                                <th>Chore Allowance</th>
+                                <th>Actions</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                userState.map((user, i) => {
+                                choreState.map((chore, i) => {
 
                                     return (
                                         <tr key={i}>
-                                            <td><Link to={`/dashbord/${user._id}`}>{user.firstName} {user.lastName}</Link></td>
-                                            <td>chore allowance</td>
-                                            <td>number of chores</td>
+                                            <td><Link to={`/dashboard/readChore/${chore._id}`}>{chore.title}</Link></td>
+                                            <td>{chore.childAssigned}</td>
+                                            <td>${chore.choreAllowanceValue}</td>
+                                            <td>
+                                                <button className='btn btn-danger' onClick={() => deleteHandler(chore._id)}>Delete</button>
+                                                <Link to={`/dashboard/updateChore/${chore._id}`} className='btn btn-sm btn-primary ms-2'>Update Chore</Link>
+
+                                            </td>
+
+
                                         </tr>
                                     )
                                 }
@@ -73,8 +114,11 @@ const AdultDashboard = () => {
                         </tbody>
                     </table>
                 </div>
+                <div className='m-4'>
+                        <Link to='/dashboard/newChore' className='btn btn-sm btn-info'>Add Chore</Link>
+                    </div>
             </div>
-            
+
         </div>
     )
 }

@@ -32,5 +32,17 @@ module.exports = {
         Chore.findByIdAndDelete(req.params.id)
             .then(result => res.json(result))
             .catch(err => res.json(err));
+    },
+    // get children with chores that are addigned to adults
+    getChildrenByAdult: (req, res) => {
+        Chore.find({adultAssigned: req.params.adultAssigned})
+            .then(children => res.json(children))
+            .catch(err => res.json(err));
+    },
+    //get all chores for a child
+    getChoresByChild: (req, res) => {
+        Chore.find({childAssigned: req.params.childAssigned})
+            .then(chores => res.json(chores))
+            .catch(err => res.json(err));
     }
 }
