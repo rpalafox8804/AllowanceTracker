@@ -107,7 +107,7 @@ const EditChore = () => {
                             <option value="">Select Child</option>
                             {
                                 childState.map((child, idx) => (
-                                    <option key={idx} value={child._id}>{child.firstName}</option>
+                                    <option key={idx} value={child}>{child.firstName}</option>
                                 ))
 
                             }
@@ -130,7 +130,7 @@ const EditChore = () => {
                             <option value="">Select Parent</option>
                             {
                                 adultState.map((adult, idx) => (
-                                    <option key={idx} value={adult._id}>{adult.firstName} - {adult._id}</option>
+                                    <option key={idx} value={adult._id}>{adult.firstName}</option>
                                 ))
 
                             }

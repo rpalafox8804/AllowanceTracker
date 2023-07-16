@@ -8,21 +8,22 @@ import { useNavigate } from 'react-router-dom'
 
 const ChildDashboard = () => {
   const { id } = useParams()
+  const { firstName } = useParams()
   const navigate = useNavigate();
-
-  const [choreState, setChoreState] = useState([])
-  useEffect(() => {
-    axios.get(`http://localhost:8000/api/chores/child/${id}`)
-      .then((res) => {
-        setChoreState(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
 
   const [childState, setChildState] = useState([])
   useEffect(() => {
+  //   const fetchChild = async () => {
+  //     try {
+  //       const res = await axios.get(`http://localhost:8000/api/users/id/${id}`)
+  //     setChildState(res.data.user)
+  //     }
+  //     catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   fetchChild()
+  // }, [])
     axios.get(`http://localhost:8000/api/users/id/${id}`)
       .then((res) => {
         setChildState(res.data.user)
@@ -31,6 +32,38 @@ const ChildDashboard = () => {
         console.log(err)
       })
   }, [])
+
+  
+
+  // console.log(childState.firstName)
+  // const [choreState, setChoreState] = useState([])
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8000/api/chores/child/${childState.firstName}`)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setChoreState(res.data)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }, [])
+  console.log(childState.firstName)
+  const [choreState, setChoreState] = useState([])
+  useEffect(() => {
+    const fetchData = async  () => {
+      try {
+      const res = await axios.get(`http://localhost:8000/api/chores/child/${firstName}`)
+      setChoreState(res.data)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+  fetchData()
+  }, [])
+
+
+      
 
 
   return (

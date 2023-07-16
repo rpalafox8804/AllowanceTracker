@@ -18,7 +18,7 @@ const ChoreSchema = new mongoose.Schema({
         min: [0, "Chore allowance value must be at least 0"]
     },
     adultAssigned: {
-        type: String,
+        type: Array,
         required: [true, "Adult assigned is required"],
     },
     note: {

@@ -50,16 +50,7 @@ const AdultDashboard = () => {
                 console.log(err)
             })
     }
-    // const getParentName = (parentId) => {
-    //     axios.get(`http://localhost:8000/api/users/id/${parentId}`)
-    //         .then((res) => {
-    //             console.log(res)
-    //             return res.data.user.firstName
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }
+
 
 
 
@@ -98,6 +89,7 @@ const AdultDashboard = () => {
                                         <tr key={i}>
                                             <td><Link to={`/dashboard/readChore/${chore._id}`}>{chore.title}</Link></td>
                                             <td>{chore.childAssigned}</td>
+                                            
                                             <td>${chore.choreAllowanceValue}</td>
                                             <td>
                                                 <button className='btn btn-danger' onClick={() => deleteHandler(chore._id)}>Delete</button>

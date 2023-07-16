@@ -8,4 +8,5 @@ module.exports = app => {
     app.delete('/api/chores/:id', ChoreController.deleteChore);
     app.get('/api/chores/adult/:adultAssigned', ChoreController.getChildrenByAdult);
     app.get('/api/chores/child/:childAssigned', ChoreController.getChoresByChild);
+    // app.get('/api/chores/child', ChoreController.getChoresByChild);
 }

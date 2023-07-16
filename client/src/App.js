@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element ={<RegLogForm />} />
           <Route path ="/dashboard" element = {<Dashboard />} />
           <Route path ="/dashboard/adult/:id" element = {<AdultDashboard />} />
-          <Route path ="/dashboard/child/:id" element = {<ChildDashboard />} />
+          <Route path ="/dashboard/child/:id/:firstName" element = {<ChildDashboard />} />
           <Route path = "/dashboard/newChore" element = {<AddChore />} />
           <Route path = "/dashboard/updateChore/:id" element = {<EditChore />} />
           <Route path = "dashboard/readChore/:id" element = {<ChoreInfo />} />

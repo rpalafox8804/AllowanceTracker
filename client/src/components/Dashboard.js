@@ -79,7 +79,7 @@ const Dashboard = () => {
                     <table className='table table-striped table-bordered'>
                         <thead className='bg-primary'>
                             <tr>
-                                <th>Name</th>
+                                <th>Adult Name</th>
                                 <th>Age</th>
 
                             </tr>
@@ -106,7 +106,7 @@ const Dashboard = () => {
                     <table className='table table-striped table-bordered'>
                         <thead className='bg-info'>
                             <tr>
-                                <th>Name</th>
+                                <th>Child Name</th>
                                 <th>Age</th>
 
 
@@ -118,7 +118,7 @@ const Dashboard = () => {
 
                                     return (
                                         <tr key={i}>
-                                            <td><Link to={`/dashboard/child/${user._id}`}>{user.firstName} {user.lastName}</Link></td>
+                                            <td><Link to={`/dashboard/child/${user._id}/${user.firstName}`}>{user.firstName} {user.lastName}</Link></td>
                                             <td>{user.age}</td>
                                         </tr>
                                     )
