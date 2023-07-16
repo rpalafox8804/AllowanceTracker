@@ -75,7 +75,7 @@ const AdultDashboard = () => {
                         <thead className='bg-primary'>
                             <tr>
                                 <th>Name of Chore</th>
-                                <th>Child ID</th>
+                                <th>Child Name</th>
                                 <th>Chore Allowance</th>
                                 <th>Actions</th>
 
