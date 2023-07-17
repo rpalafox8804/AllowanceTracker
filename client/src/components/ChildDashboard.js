@@ -7,23 +7,15 @@ import { useNavigate } from 'react-router-dom'
 
 
 const ChildDashboard = () => {
+  // hold id and firstName from params
   const { id } = useParams()
   const { firstName } = useParams()
   const navigate = useNavigate();
 
+  // hold childState and setChildState
   const [childState, setChildState] = useState([])
+  //get user information by id
   useEffect(() => {
-  //   const fetchChild = async () => {
-  //     try {
-  //       const res = await axios.get(`http://localhost:8000/api/users/id/${id}`)
-  //     setChildState(res.data.user)
-  //     }
-  //     catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   fetchChild()
-  // }, [])
     axios.get(`http://localhost:8000/api/users/id/${id}`)
       .then((res) => {
         setChildState(res.data.user)
@@ -33,22 +25,9 @@ const ChildDashboard = () => {
       })
   }, [])
 
-  
-
-  // console.log(childState.firstName)
-  // const [choreState, setChoreState] = useState([])
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8000/api/chores/child/${childState.firstName}`)
-  //     .then((res) => {
-  //       console.log(res)
-  //       setChoreState(res.data)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }, [])
-  console.log(childState.firstName)
+  //hold state for chores
   const [choreState, setChoreState] = useState([])
+  //get chores by child name
   useEffect(() => {
     const fetchData = async  () => {
       try {
@@ -68,6 +47,7 @@ const ChildDashboard = () => {
 
   return (
     <div className='container'>
+      {/* nav bar */}
       <div className='row justify-content-around bg-info'>
         <div className='col'>
           <h2>{childState.firstName}'s Dashboard</h2>
@@ -81,7 +61,7 @@ const ChildDashboard = () => {
       </div>
       <div className='row'>
         <div className='col'>
-
+          {/* table for chores assigned */}
           <table className='table table-striped'>
             <thead className='bg-primary'>
               <tr>

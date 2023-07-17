@@ -8,13 +8,14 @@ const AddChore = () => {
   const [state, setState] = useState({ childAssigned: "", title: "", adultAssigned: "", choreAllowanceValue: 0, note: "" });
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
-
+  // handle inputs in the form
   const inputHandler = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value
     })
   }
+  //handle submitting the form
   const submitHandler = (e) => {
     e.preventDefault();
     axios.post("http://localhost:8000/api/chores", state)
@@ -27,7 +28,9 @@ const AddChore = () => {
 
       })
   }
+  //hold state for chores
   const [choreState, setChoreState] = useState([])
+  //get chores from the database
   useEffect(() => {
     axios.get("http://localhost:8000/api/chores")
       .then((res) => {
@@ -38,7 +41,9 @@ const AddChore = () => {
       })
   }, [])
 
+  //hold state for children
   const [childState, setChildState] = useState([])
+  //get children from the database
   useEffect(() => {
     axios.get("http://localhost:8000/api/users/child")
       .then((res) => {
@@ -48,7 +53,9 @@ const AddChore = () => {
         console.log(err)
       })
   }, [])
+  //hold state for adults
   const [adultState, setAdultState] = useState([])
+  //get adults from the database
   useEffect(() => {
     axios.get("http://localhost:8000/api/users/adult")
       .then((res) => {
@@ -58,6 +65,7 @@ const AddChore = () => {
         console.log(err)
       })
   }, [])
+  //handle logging out
   const logoutHandler = (e) => {
     e.preventDefault();
     axios.post("http://localhost:8000/api/logout", {}, { withCredentials: true })
@@ -68,7 +76,9 @@ const AddChore = () => {
       .catch(err => console.log(err))
   }
   return (
+    
     <div className='container bg-warning'>
+      {/* Nav bar */}
       <div className='row d-flex justify-content-around bg-info'>
         <div className='col m-3'>
           <h1>Add a Chore</h1>
@@ -78,6 +88,7 @@ const AddChore = () => {
           <button className='ms-3 btn btn-primary' onClick={logoutHandler}>Logout</button>
         </div>
       </div>
+      {/* Display errors */}
       <div className='col-4 mx-auto'>
         {errors.childAssigned ? <p className="text-danger fw-bold">{errors.childAssigned.message}</p> : ""}
         {errors.title ? <p className="text-danger fw-bold">{errors.title.message}</p> : ""}
@@ -85,10 +96,11 @@ const AddChore = () => {
         {errors.adultAssigned ? <p className="text-danger fw-bold">{errors.adultAssigned.message}</p> : ""}
         {errors.note ? <p className="text-danger fw-bold">{errors.note.message}</p> : ""}
       </div>
+      {/* Form to add a chore */}
       <form className='col-4 mx-auto d-flex flex-column gap-4 p-4' onSubmit={submitHandler}>
         <div className='form-group'>
           <label className='form-label'> Child to be assigned:
-
+            {/* List children as a dropdown option */}
             <select name="childAssigned" className="form-select" onChange={inputHandler} value={state.childAssigned} >
               <option value="">Select Child</option>
               {
@@ -114,6 +126,7 @@ const AddChore = () => {
 
             <select name="adultAssigned" className="form-select" onChange={inputHandler} value={state.adultAssigned}>
               <option value="">Select Parent</option>
+              {/* list parents as an option and send id */}
               {
                 adultState.map((adult, idx) => (
                   <option key={idx} value={adult._id}>{adult.firstName}</option>

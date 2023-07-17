@@ -6,9 +6,11 @@ import { useState, useEffect } from 'react'
 
 const RegLogForm = () => {
     const navigate = useNavigate();
+    // state for errors and login errors
     const [errors, setErrors] = useState("");
     const [loginErrors, setLoginErrors] = useState("");
 
+    // state for user info
     const [userInfo, setUserInfo] = useState({
         firstName: "",
         lastName: "",
@@ -19,13 +21,14 @@ const RegLogForm = () => {
         typeOfAccount: "",
     })
 
+    // setting state for reg inputs
     const changeHandler = (e) => {
         setUserInfo({
             ...userInfo,
             [e.target.name]: e.target.value
         })
     }
-
+    // submit handler for registration
     const submitHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/register", userInfo, { withCredentials: true })
@@ -40,16 +43,19 @@ const RegLogForm = () => {
                 console.log(err)
             })
     }
+    // state for login info
     const [loginInfo, setLoginInfo] = useState({
         email: "",
         password: "",
     })
+    // setting state for login inputs
     const loginChangeHandler = (e) => {
         setLoginInfo({
             ...loginInfo,
             [e.target.name]: e.target.value
         })
     }
+    // submit handler for login
     const loginSubmitHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/login", loginInfo, { withCredentials: true })

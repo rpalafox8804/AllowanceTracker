@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const Dashboard = () => {
     const navigate = useNavigate();
 
-
+    //logout function
     const logoutHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/logout", {}, { withCredentials: true })
@@ -18,7 +18,9 @@ const Dashboard = () => {
             })
             .catch(err => console.log(err))
     }
+    //hold state for chores
     const [choreState, setChoreState] = useState([])
+    //get chores from the database
     useEffect(() => {
         axios.get("http://localhost:8000/api/chores")
             .then((res) => {
@@ -28,7 +30,10 @@ const Dashboard = () => {
                 console.log(err)
             })
     }, [])
+    //hold state for children
     const [userState, setUserState] = useState([])
+
+    //get all adults from the database
     useEffect(() => {
         axios.get("http://localhost:8000/api/users/adult")
             .then((res) => {
@@ -39,7 +44,9 @@ const Dashboard = () => {
                 console.log(err)
             })
     }, [])
+    //hold state for children
     const [childState, setChildState] = useState([])
+    //get children from the database
     useEffect(() => {
         axios.get("http://localhost:8000/api/users/child")
             .then((res) => {
@@ -50,6 +57,7 @@ const Dashboard = () => {
                 console.log(err)
             })
     }, [])
+    //handle delete of a user
     const deleteHandler = (id) => {
         const newList = userState.filter((user) => user._id !== id)
         setUserState(newList)
@@ -63,7 +71,9 @@ const Dashboard = () => {
     }
 
     return (
+        
         <div className='container'>
+            {/* navbar */}
             <div className='row d-flex justify-content-around bg-info'>
                 <div className='col m-3'>
                     <h1>Dashboard</h1>
@@ -76,6 +86,7 @@ const Dashboard = () => {
             </div>
             <div className='row '>
                 <div className='col'>
+                    {/* adult table */}
                     <table className='table table-striped table-bordered'>
                         <thead className='bg-primary'>
                             <tr>
@@ -103,6 +114,7 @@ const Dashboard = () => {
             </div>
             <div className='row '>
                 <div className='col'>
+                    {/* children table */}
                     <table className='table table-striped table-bordered'>
                         <thead className='bg-info'>
                             <tr>

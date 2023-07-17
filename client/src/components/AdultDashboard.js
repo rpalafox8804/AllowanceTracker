@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-
+// Dashboard for the Adult User
 const AdultDashboard = () => {
     const { id } = useParams()
     const [choreState, setChoreState] = useState([])
@@ -18,18 +18,9 @@ const AdultDashboard = () => {
             })
     }, [])
 
-    // const [childState, setChildState] = useState([])
-    // useEffect(() => {
-    //     axios.get("http://localhost:8000/api/users/child")
-    //         .then((res) => {
-    //             setChildState(res.data.users)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }, [])
-
+//hold state of the adult user
     const [adultState, setAdultState] = useState([])
+//get the adult user by id
     useEffect(() => {
         axios.get(`http://localhost:8000/api/users/id/${id}`)
             .then((res) => {
@@ -39,6 +30,7 @@ const AdultDashboard = () => {
                 console.log(err)
             })
     }, [])
+    //delete a chore
     const deleteHandler = (choreId) => {
         const newList = choreState.filter((chore) => chore._id !== choreId)
         setChoreState(newList)
@@ -51,13 +43,9 @@ const AdultDashboard = () => {
             })
     }
 
-
-
-
-
-
     return (
         <div className='container'>
+            {/* Nav bar area */}
             <div className='row justify-content-around bg-info'>
                 <div className='col'>
                     <h2>{adultState.firstName} {adultState.lastName} Dashboard</h2>
@@ -69,6 +57,7 @@ const AdultDashboard = () => {
                     </div>
                 </div>
             </div>
+            {/* Table area */}
             <div className='row'>
                 <div className='col'>
                     <table className='table table-striped table-bordered'>
@@ -81,8 +70,10 @@ const AdultDashboard = () => {
 
                             </tr>
                         </thead>
+                        {/* map through and show chores that the adult assigned */}
                         <tbody>
                             {
+
                                 choreState.map((chore, i) => {
 
                                     return (

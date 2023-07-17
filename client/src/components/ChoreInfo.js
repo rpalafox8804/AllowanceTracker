@@ -5,10 +5,13 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 const ChoreInfo = () => {
+    // hold id from params
     const { id } = useParams()
+    // hold choreState and setChoreState
     const [choreState, setChoreState] = useState([])
     const navigate = useNavigate();
 
+    // get chore info from db
     useEffect(() => {
         axios.get(`http://localhost:8000/api/chores/${id}`)
             .then((res) => {
@@ -20,6 +23,7 @@ const ChoreInfo = () => {
             })
     }, [])
 
+    // delete chore from db
     const deleteHandler = (e) => {
         e.preventDefault();
         axios.delete(`http://localhost:8000/api/chores/${id}`)
@@ -32,7 +36,7 @@ const ChoreInfo = () => {
 
     return (
         <div className='container'>
-
+            {/* nav bar */}
             <div className='row  bg-info justify-content-around'>
                 <div className='col-4'>
                     <h1 className='my-2'>Chore Info</h1>
@@ -45,7 +49,7 @@ const ChoreInfo = () => {
                     </div>
                 </div>
             </div>
-
+            {/* chore info */}
             <div className='row justify-content-around bg-warning'>
                 <h2>Chore Title: {choreState.title}</h2>
                 <h2>Assigned Child: {choreState.childAssigned}</h2>
